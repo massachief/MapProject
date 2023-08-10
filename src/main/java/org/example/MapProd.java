@@ -23,7 +23,7 @@ public interface MapProd<K, V> {
 
     void clear();
 
-    Set<K> keySet();
+    Collection<K> keys();
 
     Collection<V> values();
 

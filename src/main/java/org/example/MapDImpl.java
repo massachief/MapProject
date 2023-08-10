@@ -3,7 +3,7 @@ package org.example;
 import java.util.*;
 
 public class MapDImpl<K, V> implements MapProd<K, V> {
-    private List<Pair<K, V>> entries;
+    private final List<Pair<K, V>> entries;
 
     public MapDImpl(List<Pair<K, V>> entries) {
         this.entries = entries;
@@ -45,9 +45,9 @@ public class MapDImpl<K, V> implements MapProd<K, V> {
 
     @Override
     public V put(K key, V value) {
-        for (int entry = 0; entry < entries.size(); entry++) {
-            if (!key.equals(entries.get(entry).key)) entries.add(new Pair<>(key, value));
-            else entries.get(entry).value = value;
+        for (Pair<K, V> pair : entries) {
+            if (!key.equals(pair.key)) entries.add(new Pair<>(key, value));
+            else pair.value = value;
         }
         return null;
     }
@@ -65,21 +65,20 @@ public class MapDImpl<K, V> implements MapProd<K, V> {
 
     @Override
     public void putAll(Map<K, V> m) {
-        ArrayList<K> keySet = new ArrayList<>(m.keySet());
+        List<K> keySet = new ArrayList<>(m.keySet()) {
+        };
         if (m.isEmpty()) throw new IllegalArgumentException();
         for (int entry = 0; entry < m.size(); entry++) {
             for (Pair<K, V> kvPair : entries) {
-                if (keySet.get(entry).equals(kvPair.key)) {
+                if (keySet.equals(kvPair.key)) {
                     kvPair.value = m.get(kvPair.key);
                     keySet.remove(entry);
                 }
             }
 
         }
-        for (int entry = 0; entry < m.size(); entry++) {
-            entries.addAll((Collection<? extends Pair<K, V>>) m);
-            /*entries.addAll((Collection<? extends Pair<K, V>>) m);*/
-
+        for (Map.Entry<K, V> entry : m.entrySet()) {
+            entries.add(new Pair<>(entry.getKey(), entry.getValue()));
         }
     }
 
@@ -89,8 +88,8 @@ public class MapDImpl<K, V> implements MapProd<K, V> {
     }
 
     @Override
-    public Set<K> keySet() {
-        Set<K> ks = new HashSet<>();
+    public Collection<K> keys() {
+        List<K> ks = new ArrayList<>();
         for (Pair<K, V> kvPair : entries) {
             ks.add(kvPair.key);
         }
@@ -102,8 +101,8 @@ public class MapDImpl<K, V> implements MapProd<K, V> {
         Collection<V> values = new ArrayList<>() {
         };
         if (!this.isEmpty()) {
-            for (int i = 0; i < this.size(); i++) {
-                values.add(this.get(i));
+            for (Pair<K, V> pair : entries) {
+                values.add(pair.value);
             }
         }
         return values;
@@ -111,6 +110,6 @@ public class MapDImpl<K, V> implements MapProd<K, V> {
 
     @Override
     public Set<Pair<K, V>> entrySet() {
-        return (Set<Pair<K, V>>) entries;
+        return new HashSet<>(entries);
     }
 }
