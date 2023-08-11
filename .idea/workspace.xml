@@ -7,7 +7,6 @@
     <list default="true" id="a4febc9f-7f95-4a8a-8af1-457caf87e9b1" name="Changes" comment="Map interface Prod">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MapDImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MapDImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MapProd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MapProd.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +59,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691548261177</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Map interface Prod">
+      <created>1691680207698</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1691680207698</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

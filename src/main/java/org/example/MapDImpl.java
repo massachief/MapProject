@@ -65,17 +65,12 @@ public class MapDImpl<K, V> implements MapProd<K, V> {
 
     @Override
     public void putAll(Map<K, V> m) {
-        List<K> keySet = new ArrayList<>(m.keySet()) {
-        };
         if (m.isEmpty()) throw new IllegalArgumentException();
-        for (int entry = 0; entry < m.size(); entry++) {
-            for (Pair<K, V> kvPair : entries) {
-                if (keySet.equals(kvPair.key)) {
-                    kvPair.value = m.get(kvPair.key);
-                    keySet.remove(entry);
-                }
+        for (Pair<K, V> pair : entries) {
+            for (Map.Entry<K, V> entry : m.entrySet()){
+                if (entry.getKey().equals(pair.key)) pair.value = entry.getValue();
+                m.remove(entry.getKey());
             }
-
         }
         for (Map.Entry<K, V> entry : m.entrySet()) {
             entries.add(new Pair<>(entry.getKey(), entry.getValue()));
